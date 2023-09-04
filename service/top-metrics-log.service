@@ -1,0 +1,13 @@
+[Unit]
+Description=Metrics from software top for write to the log file
+After=network.target
+
+[Service]
+ExecStart=/bin/bash "/root/top-metrics-log.sh"
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
