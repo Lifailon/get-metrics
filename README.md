@@ -4,8 +4,11 @@
 
 Metrics from software **top** for write to the log file
 
-Script path: **/root/top-metrics-log.sh**
-Service path: **/etc/systemd/system/top-metrics-log.service**
+Service path: **/etc/systemd/system/top-metrics-log.service** \
+Script path: **/root/top-metrics-log.sh** \
+Script variables: \
+**path** - path to log file \
+**trigger** - CPU load percentage
 
 `systemctl daemon-reload` \
 `systemctl enable icmp-test-log.service` \
