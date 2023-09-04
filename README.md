@@ -6,15 +6,14 @@ Metrics from software **top** for write to the log file
 
 Service path: **/etc/systemd/system/top-metrics-log.service** \
 Script path: **/root/top-metrics-log.sh** \
-Script variables: \
+Script set variables: \
 **path** - path to log file (example: **/var/log/top-metrics.log**) \
 **trigger** - CPU load percentage (example: **20 %**)
 
 **Initialization unit systemd:** \
 `systemctl daemon-reload` \
-`systemctl enable icmp-test-log.service` \
-`systemctl start icmp-test-log` \
-`systemctl status icmp-test-log`
+`systemctl enable top-metrics-log.service` \
+`systemctl start top-metrics-log` \
 
 ```bash
 root@devops-01:~# systemctl status top-metrics-log.service
@@ -51,4 +50,37 @@ Warning:  4 Sep 01:16:41  Top Process: java  Time: 5:11.27  CPU: 56.2 %  MEM: 13
 Warning:  4 Sep 01:16:43  Top Process: java  Time: 5:12.71  CPU: 95.0 %  MEM: 13.6 MB  User: jenkins
 4 Sep 01:16:46  CPU(user): 6.2 %  CPU(system): 6.2 %  Proc: 1/238  Users: 2  MEM: 1599.3/3876.4 MB  SWAP: 0.8/3889.0 MB
 4 Sep 01:16:48  CPU(user): 6.7 %  CPU(system): 6.7 %  Proc: 1/242  Users: 2  MEM: 1599.3/3876.4 MB  SWAP: 0.8/3889.0 MB
+```
+
+### dir-monitor-log
+
+Directory monitoring for get metric to **file count, size and modify**
+
+Service path: **/etc/systemd/system/dir-monitor-log.service** \
+Script path: **/root/dir-monitor-log.sh** \
+Script set variables: **path** - path to log file (example: **/var/log/dir-monitor.log**) \
+
+**Example test:**
+
+```bash
+root@devops-01:~# touch /var/lib/jenkins/test /var/lib/jenkins/test2
+sleep 10
+rm /var/lib/jenkins/test /var/lib/jenkins/test2
+sleep 10
+cat "/var/log/dir-monitor.log" | tail -n 15
+4 Sep 01:40:21  Size: 333M  File Count: 12107  Modify: 4 Sep 13:35
+4 Sep 01:40:31  Size: 333M  File Count: 12107  Modify: 4 Sep 13:35
+4 Sep 01:40:41  Size: 333M  File Count: 12107  Modify: 4 Sep 13:35
+4 Sep 01:40:52  Size: 333M  File Count: 12107  Modify: 4 Sep 13:35
+4 Sep 01:41:02  Size: 333M  File Count: 12107  Modify: 4 Sep 13:35
+4 Sep 01:41:12  Size: 333M  File Count: 12107  Modify: 4 Sep 13:35
+4 Sep 01:41:22  Size: 333M  File Count: 12107  Modify: 4 Sep 13:35
+4 Sep 01:41:32  Size: 333M  File Count: 12107  Modify: 4 Sep 13:35
+4 Sep 01:41:43  Size: 333M  File Count: 12107  Modify: 4 Sep 13:35
+4 Sep 01:41:53  Size: 333M  File Count: 12109  Modify: 4 Sep 13:41
++ 0     /var/lib/jenkins/test2
++ 0     /var/lib/jenkins/test
+4 Sep 01:42:03  Size: 333M  File Count: 12107  Modify: 4 Sep 13:42
+- 0     /var/lib/jenkins/test2
+- 0     /var/lib/jenkins/test
 ```
