@@ -52,7 +52,7 @@ Warning:  4 Sep 01:16:43  Top Process: java  Time: 5:12.71  CPU: 95.0 %  MEM: 13
 
 ## iostat-metrics-log
 
-Metrics for **iostat from the set sysstat**
+Metrics for **iostat** from the set **sysstat**
 
 ```bash
 root@devops-01:~# systemctl daemon-reload
@@ -89,7 +89,7 @@ Directory monitoring for get metric to **file count, size and modify.**
 
 Service path: **/etc/systemd/system/dir-monitor-log.service** \
 Script path: **/root/dir-monitor-log.sh** \
-Script set variables: **path** - path to log file (example: **/var/log/dir-monitor.log**) \
+Script set variables: **path** - path to log file (example: **/var/log/dir-monitor.log**)
 
 **Example test:**
 
