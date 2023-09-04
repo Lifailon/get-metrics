@@ -2,8 +2,8 @@
 
 Directory monitoring for get metric to **file count, size and modify.**
 
-Service path: **/etc/systemd/system/[dir-monitor-log.service](https://github.com/Lifailon/monitor-log/blob/rsa/service/dir-monitor-log.service)** \
-Script path: **/root/[dir-monitor-log.sh](https://github.com/Lifailon/monitor-log/blob/rsa/scripts/dir-monitor-log.sh)** \
+Service path: **/etc/systemd/system/[dir-monitor-log.service](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/service/dir-monitor-log.service)** \
+Script path: **/root/[dir-monitor-log.sh](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/scripts/dir-monitor-log.sh)** \
 Script set variables: **path** - path to log file (example: **/var/log/dir-monitor.log**)
 
 **Example test:**
@@ -35,13 +35,13 @@ root@devops-01:~# cat "/var/log/dir-monitor.log" | tail -n 15
 
 Collecting metrics from software **top** for write to the log file and **logging of high-load process**.
 
-Script path: **/root/[top-metrics-log.sh](https://github.com/Lifailon/monitor-log/blob/rsa/scripts/top-metrics-log.sh)** \
+Script path: **/root/[top-metrics-log.sh](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/scripts/top-metrics-log.sh)** \
 Script set variables: \
 **path** - path to log file (example: **/var/log/top-metrics.log**) \
 **trigger** - CPU load percentage (example: **20 %**) for logging for logging high-load process
 
 **Initialization unit systemd:** \
-Creat service to path: **/etc/systemd/system/[top-metrics-log.service](https://github.com/Lifailon/monitor-log/blob/rsa/service/top-metrics-log.service)** \
+Creat service to path: **/etc/systemd/system/[top-metrics-log.service](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/service/top-metrics-log.service)** \
 `systemctl daemon-reload` \
 `systemctl enable top-metrics-log.service` \
 `systemctl start top-metrics-log`
