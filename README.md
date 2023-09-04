@@ -1,6 +1,4 @@
-## metrics-log
-
-### top-metrics-log
+## top-metrics-log
 
 Metrics from software **top** for write to the log file and logging of high-load processes.
 
@@ -52,7 +50,7 @@ Warning:  4 Sep 01:16:43  Top Process: java  Time: 5:12.71  CPU: 95.0 %  MEM: 13
 4 Sep 01:16:48  CPU(user): 6.7 %  CPU(system): 6.7 %  Proc: 1/242  Users: 2  MEM: 1599.3/3876.4 MB  SWAP: 0.8/3889.0 MB
 ```
 
-### iostat-metrics-log
+## iostat-metrics-log
 
 Metrics for **iostat from the set sysstat**
 
@@ -85,7 +83,7 @@ Sep 04 15:30:15 devops-01 bash[2660615]: 4 Sep 03:30:13  tps = 61  read/s = 0.0k
 Sep 04 15:30:22 devops-01 bash[2660906]: 4 Sep 03:30:20  tps = 135  read/s = 0.0k  write/s = 1.6M
 ```
 
-### dir-monitor-log
+## dir-monitor-log
 
 Directory monitoring for get metric to **file count, size and modify.**
 
