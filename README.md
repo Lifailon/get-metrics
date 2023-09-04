@@ -2,7 +2,7 @@
 
 ### top-metrics-log
 
-Metrics from software **top** for write to the log file
+Metrics from software **top** for write to the log file and logging of high-load processes.
 
 Service path: **/etc/systemd/system/top-metrics-log.service** \
 Script path: **/root/top-metrics-log.sh** \
@@ -54,7 +54,7 @@ Warning:  4 Sep 01:16:43  Top Process: java  Time: 5:12.71  CPU: 95.0 %  MEM: 13
 
 ### dir-monitor-log
 
-Directory monitoring for get metric to **file count, size and modify**
+Directory monitoring for get metric to **file count, size and modify.**
 
 Service path: **/etc/systemd/system/dir-monitor-log.service** \
 Script path: **/root/dir-monitor-log.sh** \
