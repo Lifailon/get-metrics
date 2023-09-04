@@ -1,14 +1,14 @@
 ## top-metrics-log
 
-Collecting metrics from software **top** for write to the log file and logging of high-load processes.
+Collecting metrics from software **top** for write to the log file and **logging of high-load process**.
 
-Service path: **/etc/systemd/system/top-metrics-log.service** \
-Script path: **/root/top-metrics-log.sh** \
+Script path: **/root/[top-metrics-log.sh](https://github.com/Lifailon/monitoring-metrics-log/blob/rsa/scripts/top-metrics-log.sh)** \
 Script set variables: \
 **path** - path to log file (example: **/var/log/top-metrics.log**) \
-**trigger** - CPU load percentage (example: **20 %**)
+**trigger** - CPU load percentage (example: **20 %**) for logging for logging high-load process
 
 **Initialization unit systemd:** \
+Creat service to path: **/etc/systemd/system/[top-metrics-log.service](https://github.com/Lifailon/monitoring-metrics-log/blob/rsa/service/top-metrics-log.service)** \
 `systemctl daemon-reload` \
 `systemctl enable top-metrics-log.service` \
 `systemctl start top-metrics-log`
