@@ -1,6 +1,6 @@
 ## top-metrics-log
 
-Metrics from software **top** for write to the log file and logging of high-load processes.
+Collecting metrics from software **top** for write to the log file and logging of high-load processes.
 
 Service path: **/etc/systemd/system/top-metrics-log.service** \
 Script path: **/root/top-metrics-log.sh** \
