@@ -15,7 +15,7 @@ Creat service to path: **/etc/systemd/system/[top-metrics-log.service](https://g
 
 ```bash
 root@devops-01:~# systemctl status top-metrics-log.service
-● top-metrics-log.service - Metrics from soft top for write to the log file
+● top-metrics-log.service - Metrics from software top for write to the log file
      Loaded: loaded (/etc/systemd/system/top-metrics-log.service; enabled; vendor preset: enabled)
      Active: active (running) since Mon 2023-09-04 09:45:32 MSK; 3h 31min ago
    Main PID: 2023242 (bash)
@@ -59,7 +59,7 @@ root@devops-01:~# systemctl daemon-reload
 root@devops-01:~# systemctl enable iostat-metrics-log.service
 root@devops-01:~# systemctl start iostat-metrics-log.service
 root@devops-01:~# systemctl status iostat-metrics-log.service
-● iostat-metrics-log.service - Directory monitoring for get metric to file count, size and modify
+● iostat-metrics-log.service - Metrics for iostat from the set sysstat
      Loaded: loaded (/etc/systemd/system/iostat-metrics-log.service; enabled; vendor preset: enabled)
      Active: active (running) since Mon 2023-09-04 15:27:38 MSK; 2min 46s ago
    Main PID: 2655004 (bash)
