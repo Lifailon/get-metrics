@@ -64,10 +64,10 @@ Script set variables: **path** - path to log file (example: **/var/log/dir-monit
 
 ```bash
 root@devops-01:~# touch /var/lib/jenkins/test /var/lib/jenkins/test2
-sleep 10
-rm /var/lib/jenkins/test /var/lib/jenkins/test2
-sleep 10
-cat "/var/log/dir-monitor.log" | tail -n 15
+root@devops-01:~# sleep 10
+root@devops-01:~# rm /var/lib/jenkins/test /var/lib/jenkins/test2
+root@devops-01:~# sleep 10
+root@devops-01:~# cat "/var/log/dir-monitor.log" | tail -n 15
 4 Sep 01:40:21  Size: 333M  File Count: 12107  Modify: 4 Sep 13:35
 4 Sep 01:40:31  Size: 333M  File Count: 12107  Modify: 4 Sep 13:35
 4 Sep 01:40:41  Size: 333M  File Count: 12107  Modify: 4 Sep 13:35
@@ -83,4 +83,6 @@ cat "/var/log/dir-monitor.log" | tail -n 15
 4 Sep 01:42:03  Size: 333M  File Count: 12107  Modify: 4 Sep 13:42
 - 0     /var/lib/jenkins/test2
 - 0     /var/lib/jenkins/test
+4 Sep 01:42:13  Size: 333M  File Count: 12107  Modify: 4 Sep 13:42
+4 Sep 01:42:24  Size: 333M  File Count: 12107  Modify: 4 Sep 13:42
 ```
