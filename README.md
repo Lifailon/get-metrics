@@ -13,7 +13,7 @@ Script set variables: \
 **Initialization unit systemd:** \
 `systemctl daemon-reload` \
 `systemctl enable top-metrics-log.service` \
-`systemctl start top-metrics-log` \
+`systemctl start top-metrics-log`
 
 ```bash
 root@devops-01:~# systemctl status top-metrics-log.service
