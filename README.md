@@ -57,29 +57,32 @@ Warning:  4 Sep 01:16:43  Top Process: java  Time: 5:12.71  CPU: 95.0 %  MEM: 13
 Metrics for **iostat from the set sysstat**
 
 ```bash
+root@devops-01:~# systemctl daemon-reload
+root@devops-01:~# systemctl enable iostat-metrics-log.service
+root@devops-01:~# systemctl start iostat-metrics-log.service
 root@devops-01:~# systemctl status iostat-metrics-log.service
 ● iostat-metrics-log.service - Directory monitoring for get metric to file count, size and modify
      Loaded: loaded (/etc/systemd/system/iostat-metrics-log.service; enabled; vendor preset: enabled)
-     Active: active (running) since Mon 2023-09-04 15:23:00 MSK; 57s ago
-   Main PID: 2645367 (bash)
-      Tasks: 4 (limit: 4515)
-     Memory: 1.2M
-        CPU: 343ms
+     Active: active (running) since Mon 2023-09-04 15:27:38 MSK; 2min 46s ago
+   Main PID: 2655004 (bash)
+      Tasks: 3 (limit: 4515)
+     Memory: 1.1M
+        CPU: 894ms
      CGroup: /system.slice/iostat-metrics-log.service
              ├─2644388 iostat -yh /dev/sda 1
-             ├─2645367 /bin/bash /root/iostat-metrics-log.sh
-             ├─2647333 iostat -yh /dev/sda 1
-             └─2647334 sleep 2
+             ├─2655004 /bin/bash /root/iostat-metrics-log.sh
+             └─2660908 sleep 5
 
-Sep 04 15:23:00 devops-01 systemd[1]: Started Directory monitoring for get metric to file count, size and modify.
-Sep 04 15:23:02 devops-01 bash[2645462]: 4 Sep 03:23:00        tps = 65        read/s = 0.0k        write/s = 1020.0k
-Sep 04 15:23:09 devops-01 bash[2645695]: 4 Sep 03:23:07        tps = 57        read/s = 0.0k        write/s = 1.0M
-Sep 04 15:23:16 devops-01 bash[2645919]: 4 Sep 03:23:14        tps = 80        read/s = 0.0k        write/s = 1.2M
-Sep 04 15:23:23 devops-01 bash[2646198]: 4 Sep 03:23:21        tps = 51        read/s = 0.0k        write/s = 736.0k
-Sep 04 15:23:30 devops-01 bash[2646430]: 4 Sep 03:23:28        tps = 81        read/s = 0.0k        write/s = 1.1M
-Sep 04 15:23:37 devops-01 bash[2646655]: 4 Sep 03:23:35        tps = 101        read/s = 0.0k        write/s = 1.3M
-Sep 04 15:23:45 devops-01 bash[2646939]: 4 Sep 03:23:43        tps = 108        read/s = 0.0k        write/s = 1.4M
-Sep 04 15:23:52 devops-01 bash[2647200]: 4 Sep 03:23:50        tps = 46        read/s = 0.0k        write/s = 812.0k
+Sep 04 15:29:19 devops-01 bash[2658546]: 4 Sep 03:29:17  tps = 56  read/s = 0.0k  write/s = 844.0k
+Sep 04 15:29:26 devops-01 bash[2658766]: 4 Sep 03:29:24  tps = 50  read/s = 0.0k  write/s = 744.0k
+Sep 04 15:29:33 devops-01 bash[2659097]: 4 Sep 03:29:31  tps = 72  read/s = 0.0k  write/s = 956.0k
+Sep 04 15:29:40 devops-01 bash[2659464]: 4 Sep 03:29:38  tps = 85  read/s = 0.0k  write/s = 1020.0k
+Sep 04 15:29:47 devops-01 bash[2659671]: 4 Sep 03:29:45  tps = 73  read/s = 0.0k  write/s = 1020.0k
+Sep 04 15:29:54 devops-01 bash[2659900]: 4 Sep 03:29:52  tps = 96  read/s = 0.0k  write/s = 1.1M
+Sep 04 15:30:01 devops-01 bash[2660152]: 4 Sep 03:29:59  tps = 63  read/s = 0.0k  write/s = 1.0M
+Sep 04 15:30:08 devops-01 bash[2660359]: 4 Sep 03:30:06  tps = 73  read/s = 0.0k  write/s = 1.1M
+Sep 04 15:30:15 devops-01 bash[2660615]: 4 Sep 03:30:13  tps = 61  read/s = 0.0k  write/s = 1.1M
+Sep 04 15:30:22 devops-01 bash[2660906]: 4 Sep 03:30:20  tps = 135  read/s = 0.0k  write/s = 1.6M
 ```
 
 ### dir-monitor-log
