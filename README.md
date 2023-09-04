@@ -68,8 +68,6 @@ root@devops-01:~# sleep 10
 root@devops-01:~# rm /var/lib/jenkins/test /var/lib/jenkins/test2
 root@devops-01:~# sleep 10
 root@devops-01:~# cat "/var/log/dir-monitor.log" | tail -n 15
-4 Sep 01:40:21  Size: 333M  File Count: 12107  Modify: 4 Sep 13:35
-4 Sep 01:40:31  Size: 333M  File Count: 12107  Modify: 4 Sep 13:35
 4 Sep 01:40:41  Size: 333M  File Count: 12107  Modify: 4 Sep 13:35
 4 Sep 01:40:52  Size: 333M  File Count: 12107  Modify: 4 Sep 13:35
 4 Sep 01:41:02  Size: 333M  File Count: 12107  Modify: 4 Sep 13:35
