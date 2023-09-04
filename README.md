@@ -52,6 +52,36 @@ Warning:  4 Sep 01:16:43  Top Process: java  Time: 5:12.71  CPU: 95.0 %  MEM: 13
 4 Sep 01:16:48  CPU(user): 6.7 %  CPU(system): 6.7 %  Proc: 1/242  Users: 2  MEM: 1599.3/3876.4 MB  SWAP: 0.8/3889.0 MB
 ```
 
+### iostat-metrics-log
+
+Metrics for **iostat from the set sysstat**
+
+```bash
+root@devops-01:~# systemctl status iostat-metrics-log.service
+● iostat-metrics-log.service - Directory monitoring for get metric to file count, size and modify
+     Loaded: loaded (/etc/systemd/system/iostat-metrics-log.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2023-09-04 15:23:00 MSK; 57s ago
+   Main PID: 2645367 (bash)
+      Tasks: 4 (limit: 4515)
+     Memory: 1.2M
+        CPU: 343ms
+     CGroup: /system.slice/iostat-metrics-log.service
+             ├─2644388 iostat -yh /dev/sda 1
+             ├─2645367 /bin/bash /root/iostat-metrics-log.sh
+             ├─2647333 iostat -yh /dev/sda 1
+             └─2647334 sleep 2
+
+Sep 04 15:23:00 devops-01 systemd[1]: Started Directory monitoring for get metric to file count, size and modify.
+Sep 04 15:23:02 devops-01 bash[2645462]: 4 Sep 03:23:00        tps = 65        read/s = 0.0k        write/s = 1020.0k
+Sep 04 15:23:09 devops-01 bash[2645695]: 4 Sep 03:23:07        tps = 57        read/s = 0.0k        write/s = 1.0M
+Sep 04 15:23:16 devops-01 bash[2645919]: 4 Sep 03:23:14        tps = 80        read/s = 0.0k        write/s = 1.2M
+Sep 04 15:23:23 devops-01 bash[2646198]: 4 Sep 03:23:21        tps = 51        read/s = 0.0k        write/s = 736.0k
+Sep 04 15:23:30 devops-01 bash[2646430]: 4 Sep 03:23:28        tps = 81        read/s = 0.0k        write/s = 1.1M
+Sep 04 15:23:37 devops-01 bash[2646655]: 4 Sep 03:23:35        tps = 101        read/s = 0.0k        write/s = 1.3M
+Sep 04 15:23:45 devops-01 bash[2646939]: 4 Sep 03:23:43        tps = 108        read/s = 0.0k        write/s = 1.4M
+Sep 04 15:23:52 devops-01 bash[2647200]: 4 Sep 03:23:50        tps = 46        read/s = 0.0k        write/s = 812.0k
+```
+
 ### dir-monitor-log
 
 Directory monitoring for get metric to **file count, size and modify.**
