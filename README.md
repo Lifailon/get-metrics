@@ -166,3 +166,8 @@ Sep 05 14:27:30 devops-01 bash[1039591]:
 
 ### Data to InfluxDB
 
+`SELECT * FROM "iostat_metrics_table" WHERE time > now() - 5m`
+
+`SELECT * FROM iostat_metrics_table WHERE disk = 'sda'`
+
+`SELECT read_kb_sec,write_kb_sec,MAX(tps) FROM "iostat_metrics_table" GROUP BY instance`
