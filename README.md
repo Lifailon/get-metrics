@@ -5,7 +5,7 @@ Directory monitoring for get metric to **file count, size and modify.** When the
 **Service path:** /etc/systemd/system/[dir-monitor-log.service](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/service/dir-monitor-log.service) \
 **Script path:** /root/[dir-monitor-log.sh](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/scripts/dir-monitor-log.sh) \
 Script set variables: \
-**path_mon** - target directory for monitoring (example: **/var/lib/jenkins/**) \
+**path_mon** - target directory for monitoring (example: **/var/lib/jenkins**) \
 **path_log** - path to log file (example: **/var/log/dir-monitor.log**)
 
 **Example:**
