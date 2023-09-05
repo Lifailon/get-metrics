@@ -1,9 +1,9 @@
 [Unit]
-Description=Collection metrics iostat from the set sysstat for write log file
+Description=Collection metrics iostat from the set sysstat for send to influxdb
 After=network.target
 
 [Service]
-ExecStart=/bin/bash "/root/iostat-metrics-log.sh"
+ExecStart=/bin/bash "/root/iostat-to-influxdb.sh"
 ExecReload=/bin/kill -HUP $MAINPID
 KillMode=process
 Restart=on-failure
