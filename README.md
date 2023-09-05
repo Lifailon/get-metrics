@@ -127,9 +127,37 @@ Sep 05 12:45:54 devops-01 bash[729061]: 5 Sep 12:45:52  tps = 0  read/s = 0.0k  
 
 ## logrotate
 
-Automated log file rotation for all metrics: /etc/logrotate.d/[logrotate_metrics.conf](https://github.com/Lifailon/get-metrics/blob/rsa/logrotate_metrics.conf) \
-Debug: \
-`logrotate -d /etc/logrotate.d/logrotate_metrics.conf`
+Automated log file rotation for all metrics: /etc/logrotate.d/[logrotate_metrics.conf](https://github.com/Lifailon/get-metrics/blob/rsa/logrotate_metrics.conf)
+
+**Debug:**
+
+``` bash
+root@devops-01:~# logrotate -d /etc/logrotate.d/logrotate_metrics.conf
+...
+rotating pattern: /var/log/metrics/dir-monitor.log  10485760 bytes (2 rotations)
+empty log files are rotated, old logs are removed
+considering log /var/log/metrics/dir-monitor.log
+Creating new state
+  Now: 2023-09-05 21:31
+  Last rotated at 2023-09-05 21:00
+  log does not need rotating (log size is below the 'size' threshold)
+
+rotating pattern: /var/log/metrics/top-metrics.log  10485760 bytes (2 rotations)
+empty log files are rotated, old logs are removed
+considering log /var/log/metrics/top-metrics.log
+Creating new state
+  Now: 2023-09-05 21:31
+  Last rotated at 2023-09-05 21:00
+  log does not need rotating (log size is below the 'size' threshold)
+
+rotating pattern: /var/log/metrics/iostat-metrics.log  10485760 bytes (2 rotations)
+empty log files are rotated, old logs are removed
+considering log /var/log/metrics/iostat-metrics.log
+Creating new state
+  Now: 2023-09-05 21:31
+  Last rotated at 2023-09-05 21:00
+  log does not need rotating (log size is below the 'size' threshold)
+```
 
 ## iostat-to-influxdb
 
