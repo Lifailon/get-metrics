@@ -6,7 +6,7 @@ Directory monitoring for get metric to **file count, size and modify.** When the
 **Script path:** /root/[dir-monitor-log.sh](https://github.com/Lifailon/get-metrics/blob/rsa/scripts/dir-monitor-log.sh) \
 Script variables: \
 **path_mon** - target directory for monitoring (example: **/var/lib/jenkins**) \
-**path_log** - path to log file (example: **/var/log/dir-monitor.log**)
+**path_log** - path to log file (example: **/var/log/metrics/dir-monitor.log**)
 
 **Example:**
 
@@ -42,7 +42,7 @@ Collecting metrics from software **top** for write to the log file and **logging
 
 **Script path:** /root/[top-metrics-log.sh](https://github.com/Lifailon/get-metrics/blob/rsa/scripts/top-metrics-log.sh) \
 Script variables: \
-**path** - path to log file (example: **/var/log/top-metrics.log**) \
+**path** - path to log file (example: **/var/log/metrics/top-metrics.log**) \
 **trigger** - CPU load percentage (example: **20 %**) for logging for logging high-load process
 
 **Initialization unit to systemd:** \
@@ -94,7 +94,7 @@ Collection metrics **iostat** from the set sysstat for **write log file**
 
 **Service path:** /etc/systemd/system/[iostat-metrics-log.service](https://github.com/Lifailon/get-metrics/blob/rsa/service/iostat-metrics-log.service) \
 **Script path:** /root/[iostat-metrics-log.sh](https://github.com/Lifailon/get-metrics/blob/rsa/scripts/iostat-metrics-log.sh) \
-Script variables: **path** - path to log file (example: **/var/log/iostat.log**)
+Script variables: **path** - path to log file (example: **/var/log/metrics/iostat-metrics.log**)
 
 ```bash
 root@devops-01:~# systemctl daemon-reload
