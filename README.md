@@ -170,9 +170,12 @@ Sep 05 14:27:30 devops-01 bash[1039591]:
 
 ![Image alt](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/screen/iostat-influxdb-data.jpg)
 
-`SELECT * FROM iostat_metrics_table WHERE disk = 'sda'`
+**Key by name selection:**
+`SELECT * FROM iostat_metrics_table WHERE disk = 'sda' and time > now() - 10m`
 
 ![Image alt](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/screen/iostat-influxdb-key-selection.jpg)
+
+**Founction for output of the maximum tps value:**
 
 `SELECT read_kb_sec,write_kb_sec,MAX(tps) FROM "iostat_metrics_table" GROUP BY instance`
 
