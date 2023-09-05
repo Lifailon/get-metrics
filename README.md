@@ -125,6 +125,11 @@ Sep 05 12:45:54 devops-01 bash[729046]: 5 Sep 12:45:52  tps = 0  read/s = 0.0k  
 Sep 05 12:45:54 devops-01 bash[729061]: 5 Sep 12:45:52  tps = 0  read/s = 0.0k  write/s = 0.0k
 ```
 
+## logrotate
+
+Automated log file rotation for all metrics: \
+`nano /etc/logrotate.d/[logrotate_metrics.conf](https://github.com/Lifailon/get-metrics/blob/rsa/logrotate_metrics.conf)`
+
 ## iostat-to-influxdb
 
 **Service path:** /etc/systemd/system/[iostat-to-influxdb.service](https://github.com/Lifailon/get-metrics/blob/rsa/service/iostat-to-influxdb.service) \
