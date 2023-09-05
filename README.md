@@ -94,7 +94,8 @@ Collection metrics **iostat** from the set sysstat for **write log file**
 
 **Service path:** /etc/systemd/system/[iostat-metrics-log.service](https://github.com/Lifailon/get-metrics/blob/rsa/service/iostat-metrics-log.service) \
 **Script path:** /root/[iostat-metrics-log.sh](https://github.com/Lifailon/get-metrics/blob/rsa/scripts/iostat-metrics-log.sh) \
-Script variables: **path** - path to log file (example: **/var/log/metrics/iostat-metrics.log**)
+Script variables: \
+**path** - path to log file (example: **/var/log/metrics/iostat-metrics.log**)
 
 ```bash
 root@devops-01:~# systemctl daemon-reload
