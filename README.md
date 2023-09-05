@@ -171,6 +171,7 @@ Sep 05 14:27:30 devops-01 bash[1039591]:
 ![Image alt](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/screen/iostat-influxdb-data.jpg)
 
 **Key by name selection:**
+
 `SELECT * FROM iostat_metrics_table WHERE disk = 'sda' and time > now() - 10m`
 
 ![Image alt](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/screen/iostat-influxdb-key-selection.jpg)
