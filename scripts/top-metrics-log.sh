@@ -1,5 +1,5 @@
 #!/bin/bash
-path="/var/log/top-metrics.log"
+path="/var/log/metrics/top-metrics.log"
 trigger="20"
 while :
 do

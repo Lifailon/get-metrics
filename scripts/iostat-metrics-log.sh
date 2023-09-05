@@ -1,5 +1,5 @@
 #!/bin/bash
-path="/var/log/iostat.log"
+path="/var/log/metrics/iostat-metrics.log"
 while :
 do
 date=$(date | awk '{print $3,$2,$4}')

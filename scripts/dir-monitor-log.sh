@@ -1,6 +1,6 @@
 #!/bin/bash
 path_mon="/var/lib/jenkins"
-path_log="/var/log/dir-monitor.log"
+path_log="/var/log/metrics/dir-monitor.log"
 precount=0
 while :
 do
