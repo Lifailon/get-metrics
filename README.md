@@ -1,12 +1,12 @@
 ## dir-monitor-log
 
-Directory monitoring for get metric to **file count, size and modify.**
+Directory monitoring for get metric to **file count, size and modify.** When the number of files is changed, a diff of changes is logging.
 
 **Service path:** /etc/systemd/system/[dir-monitor-log.service](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/service/dir-monitor-log.service) \
 **Script path:** /root/[dir-monitor-log.sh](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/scripts/dir-monitor-log.sh) \
 Script set variables: **path** - path to log file (example: **/var/log/dir-monitor.log**)
 
-**Example test:**
+**Example:**
 
 ```bash
 root@devops-01:~# touch /var/lib/jenkins/test /var/lib/jenkins/test2
