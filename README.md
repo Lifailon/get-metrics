@@ -2,8 +2,8 @@
 
 Directory monitoring for get metric to **file count, size and modify.** When the number of files is changed, a diff of changes is logging.
 
-**Service path:** /etc/systemd/system/[dir-monitor-log.service](https://github.com/Lifailon/select-metrics/blob/rsa/service/dir-monitor-log.service) \
-**Script path:** /root/[dir-monitor-log.sh](https://github.com/Lifailon/select-metrics/blob/rsa/scripts/dir-monitor-log.sh) \
+**Service path:** /etc/systemd/system/[dir-monitor-log.service](https://github.com/Lifailon/get-metrics/blob/rsa/service/dir-monitor-log.service) \
+**Script path:** /root/[dir-monitor-log.sh](https://github.com/Lifailon/get-metrics/blob/rsa/scripts/dir-monitor-log.sh) \
 Script variables: \
 **path_mon** - target directory for monitoring (example: **/var/lib/jenkins**) \
 **path_log** - path to log file (example: **/var/log/dir-monitor.log**)
@@ -40,13 +40,13 @@ root@devops-01:~# cat "/var/log/dir-monitor.log" | tail -n 15
 
 Collecting metrics from software **top** for write to the log file and **logging of high-load process**.
 
-**Script path:** /root/[top-metrics-log.sh](https://github.com/Lifailon/select-metrics/blob/rsa/scripts/top-metrics-log.sh) \
+**Script path:** /root/[top-metrics-log.sh](https://github.com/Lifailon/get-metrics/blob/rsa/scripts/top-metrics-log.sh) \
 Script variables: \
 **path** - path to log file (example: **/var/log/top-metrics.log**) \
 **trigger** - CPU load percentage (example: **20 %**) for logging for logging high-load process
 
 **Initialization unit to systemd:** \
-Creat service to path: /etc/systemd/system/[top-metrics-log.service](https://github.com/Lifailon/select-metrics/blob/rsa/service/top-metrics-log.service) \
+Creat service to path: /etc/systemd/system/[top-metrics-log.service](https://github.com/Lifailon/get-metrics/blob/rsa/service/top-metrics-log.service) \
 `systemctl daemon-reload` \
 `systemctl enable top-metrics-log.service` \
 `systemctl start top-metrics-log`
@@ -92,8 +92,8 @@ Warning:  4 Sep 01:16:43  Top Process: java  Time: 5:12.71  CPU: 95.0 %  MEM: 13
 
 Collection metrics **iostat** from the set sysstat for **write log file**
 
-**Service path:** /etc/systemd/system/[iostat-metrics-log.service](https://github.com/Lifailon/select-metrics/blob/rsa/service/iostat-metrics-log.service) \
-**Script path:** /root/[iostat-metrics-log.sh](https://github.com/Lifailon/select-metrics/blob/rsa/scripts/iostat-metrics-log.sh) \
+**Service path:** /etc/systemd/system/[iostat-metrics-log.service](https://github.com/Lifailon/get-metrics/blob/rsa/service/iostat-metrics-log.service) \
+**Script path:** /root/[iostat-metrics-log.sh](https://github.com/Lifailon/get-metrics/blob/rsa/scripts/iostat-metrics-log.sh) \
 Script variables: **path** - path to log file (example: **/var/log/iostat.log**)
 
 ```bash
@@ -127,8 +127,8 @@ Sep 05 12:45:54 devops-01 bash[729061]: 5 Sep 12:45:52  tps = 0  read/s = 0.0k  
 
 ## iostat-to-influxdb
 
-**Service path:** /etc/systemd/system/[iostat-to-influxdb.service](https://github.com/Lifailon/select-metrics/blob/rsa/service/iostat-to-influxdb.service) \
-**Script path:** /root/[iostat-to-influxdb.sh](https://github.com/Lifailon/select-metrics/blob/rsa/scripts/iostat-to-influxdb.sh) \
+**Service path:** /etc/systemd/system/[iostat-to-influxdb.service](https://github.com/Lifailon/get-metrics/blob/rsa/service/iostat-to-influxdb.service) \
+**Script path:** /root/[iostat-to-influxdb.sh](https://github.com/Lifailon/get-metrics/blob/rsa/scripts/iostat-to-influxdb.sh) \
 Script variables: \
 **ip** - ip-address server InfluxDB \
 **db** - Database name \
@@ -168,16 +168,16 @@ Sep 05 14:27:30 devops-01 bash[1039591]:
 
 `SELECT * FROM "iostat_metrics_table" WHERE time > now() - 5m`
 
-![Image alt](https://github.com/Lifailon/select-metrics/blob/rsa/screen/iostat-influxdb-data.jpg)
+![Image alt](https://github.com/Lifailon/get-metrics/blob/rsa/screen/iostat-influxdb-data.jpg)
 
 **Key by name selection:**
 
 `SELECT * FROM iostat_metrics_table WHERE disk = 'sda' and time > now() - 10m`
 
-![Image alt](https://github.com/Lifailon/select-metrics/blob/rsa/screen/iostat-influxdb-key-selection.jpg)
+![Image alt](https://github.com/Lifailon/get-metrics/blob/rsa/screen/iostat-influxdb-key-selection.jpg)
 
 **Founction for output of the maximum tps value:**
 
 `SELECT read_kb_sec,write_kb_sec,MAX(tps) FROM "iostat_metrics_table" GROUP BY instance`
 
-![Image alt](https://github.com/Lifailon/select-metrics/blob/rsa/screen/iostat-influxdb-max-tps.jpg)
+![Image alt](https://github.com/Lifailon/get-metrics/blob/rsa/screen/iostat-influxdb-max-tps.jpg)
