@@ -2,8 +2,8 @@
 
 Directory monitoring for get metric to **file count, size and modify.**
 
-Service path: **/etc/systemd/system/[dir-monitor-log.service](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/service/dir-monitor-log.service)** \
-Script path: **/root/[dir-monitor-log.sh](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/scripts/dir-monitor-log.sh)** \
+**Service path:** /etc/systemd/system/[dir-monitor-log.service](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/service/dir-monitor-log.service) \
+**Script path:** /root/[dir-monitor-log.sh](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/scripts/dir-monitor-log.sh) \
 Script set variables: **path** - path to log file (example: **/var/log/dir-monitor.log**)
 
 **Example test:**
@@ -35,13 +35,13 @@ root@devops-01:~# cat "/var/log/dir-monitor.log" | tail -n 15
 
 Collecting metrics from software **top** for write to the log file and **logging of high-load process**.
 
-Script path: **/root/[top-metrics-log.sh](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/scripts/top-metrics-log.sh)** \
+**Script path:** /root/[top-metrics-log.sh](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/scripts/top-metrics-log.sh) \
 Script set variables: \
 **path** - path to log file (example: **/var/log/top-metrics.log**) \
 **trigger** - CPU load percentage (example: **20 %**) for logging for logging high-load process
 
-**Initialization unit systemd:** \
-Creat service to path: **/etc/systemd/system/[top-metrics-log.service](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/service/top-metrics-log.service)** \
+**Initialization unit to systemd:** \
+Creat service to path: /etc/systemd/system/[top-metrics-log.service](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/service/top-metrics-log.service) \
 `systemctl daemon-reload` \
 `systemctl enable top-metrics-log.service` \
 `systemctl start top-metrics-log`
@@ -85,33 +85,40 @@ Warning:  4 Sep 01:16:43  Top Process: java  Time: 5:12.71  CPU: 95.0 %  MEM: 13
 
 ## iostat-metrics-log
 
-Metrics for **iostat** from the set **sysstat**
+Collection metrics **iostat** from the set sysstat for **write log file**
+
+**Service path:** /etc/systemd/system/[iostat-metrics-log.service](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/service/iostat-metrics-log.service) \
+**Script path:** /root/[iostat-metrics-log.sh](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/scripts/iostat-metrics-log.sh) \
+Script set variables: **path** - path to log file (example: **/var/log/iostat.log**)
 
 ```bash
 root@devops-01:~# systemctl daemon-reload
 root@devops-01:~# systemctl enable iostat-metrics-log.service
 root@devops-01:~# systemctl start iostat-metrics-log.service
 root@devops-01:~# systemctl status iostat-metrics-log.service
-● iostat-metrics-log.service - Metrics for iostat from the set sysstat
+● iostat-metrics-log.service - Directory monitoring for get metric to file count, size and modify
      Loaded: loaded (/etc/systemd/system/iostat-metrics-log.service; enabled; vendor preset: enabled)
-     Active: active (running) since Mon 2023-09-04 15:27:38 MSK; 2min 46s ago
-   Main PID: 2655004 (bash)
+     Active: active (running) since Tue 2023-09-05 12:44:33 MSK; 1min 20s ago
+   Main PID: 724914 (bash)
       Tasks: 3 (limit: 4515)
-     Memory: 1.1M
-        CPU: 894ms
+     Memory: 14.7M
+        CPU: 977ms
      CGroup: /system.slice/iostat-metrics-log.service
-             ├─2644388 iostat -yh /dev/sda 1
-             ├─2655004 /bin/bash /root/iostat-metrics-log.sh
-             └─2660908 sleep 5
+             ├─ 724914 /bin/bash /root/iostat-metrics-log.sh
+             ├─ 729062 sleep 5
+             └─2644388 iostat -yh /dev/sda 1
 
-Sep 04 15:29:19 devops-01 bash[2658546]: 4 Sep 03:29:17  tps = 56  read/s = 0.0k  write/s = 844.0k
-Sep 04 15:29:26 devops-01 bash[2658766]: 4 Sep 03:29:24  tps = 50  read/s = 0.0k  write/s = 744.0k
-Sep 04 15:29:33 devops-01 bash[2659097]: 4 Sep 03:29:31  tps = 72  read/s = 0.0k  write/s = 956.0k
-Sep 04 15:29:40 devops-01 bash[2659464]: 4 Sep 03:29:38  tps = 85  read/s = 0.0k  write/s = 1020.0k
-Sep 04 15:29:47 devops-01 bash[2659671]: 4 Sep 03:29:45  tps = 73  read/s = 0.0k  write/s = 1020.0k
-Sep 04 15:29:54 devops-01 bash[2659900]: 4 Sep 03:29:52  tps = 96  read/s = 0.0k  write/s = 1.1M
-Sep 04 15:30:01 devops-01 bash[2660152]: 4 Sep 03:29:59  tps = 63  read/s = 0.0k  write/s = 1.0M
-Sep 04 15:30:08 devops-01 bash[2660359]: 4 Sep 03:30:06  tps = 73  read/s = 0.0k  write/s = 1.1M
-Sep 04 15:30:15 devops-01 bash[2660615]: 4 Sep 03:30:13  tps = 61  read/s = 0.0k  write/s = 1.1M
-Sep 04 15:30:22 devops-01 bash[2660906]: 4 Sep 03:30:20  tps = 135  read/s = 0.0k  write/s = 1.6M
+Sep 05 12:45:35 devops-01 bash[728116]: 5 Sep 12:45:34  tps = 0  read/s = 0.0k  write/s = 0.0k
+Sep 05 12:45:41 devops-01 bash[728450]: 5 Sep 12:45:40  tps = 164  read/s = 0.0k  write/s = 1.4M
+Sep 05 12:45:41 devops-01 bash[728465]: 5 Sep 12:45:40  tps = 0  read/s = 0.0k  write/s = 0.0k
+Sep 05 12:45:41 devops-01 bash[728480]: 5 Sep 12:45:40  tps = 0  read/s = 0.0k  write/s = 0.0k
+Sep 05 12:45:47 devops-01 bash[728776]: 5 Sep 12:45:46  tps = 123  read/s = 0.0k  write/s = 1.3M
+Sep 05 12:45:47 devops-01 bash[728791]: 5 Sep 12:45:46  tps = 0  read/s = 0.0k  write/s = 0.0k
+Sep 05 12:45:47 devops-01 bash[728806]: 5 Sep 12:45:46  tps = 0  read/s = 0.0k  write/s = 0.0k
+Sep 05 12:45:54 devops-01 bash[729031]: 5 Sep 12:45:52  tps = 99  read/s = 0.0k  write/s = 1.2M
+Sep 05 12:45:54 devops-01 bash[729046]: 5 Sep 12:45:52  tps = 0  read/s = 0.0k  write/s = 0.0k
+Sep 05 12:45:54 devops-01 bash[729061]: 5 Sep 12:45:52  tps = 0  read/s = 0.0k  write/s = 0.0k
 ```
+
+## iostat-to-influxdb
+
