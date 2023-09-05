@@ -8,9 +8,7 @@ date=$(date | awk '{print $3,$2,$4}')
 size=$(du -sh $path_mon | awk '{print $1}')
 du=$(du -ah $path_mon)
 count=$(printf "%s\n" "${du[@]}" | wc -l)
-dir=$(echo $path_mon | sed -r "s/.+\///")
-path=$(echo $path_mon | sed "s/$dir//")
-modify=$(ls -lh $path | grep $dir | awk '{print $7,$6,$8}')
+modify=$(ls -ld $path_mon | awk '{print $7,$6,$8}')
 echo -e "$date  Size: $size  File Count: $count  Modify: $modify" >> $path_log
 cat $path_log | tail -n 1
 if (( $(echo "$precount > $count" | bc) )) || (( $(echo "$precount < $count" | bc) )) && (( $(echo "$precount != 0" | bc) ))
