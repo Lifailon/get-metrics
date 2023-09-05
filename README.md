@@ -4,7 +4,7 @@ Directory monitoring for get metric to **file count, size and modify.** When the
 
 **Service path:** /etc/systemd/system/[dir-monitor-log.service](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/service/dir-monitor-log.service) \
 **Script path:** /root/[dir-monitor-log.sh](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/scripts/dir-monitor-log.sh) \
-Script set variables: \
+Script variables: \
 **path_mon** - target directory for monitoring (example: **/var/lib/jenkins**) \
 **path_log** - path to log file (example: **/var/log/dir-monitor.log**)
 
@@ -41,7 +41,7 @@ root@devops-01:~# cat "/var/log/dir-monitor.log" | tail -n 15
 Collecting metrics from software **top** for write to the log file and **logging of high-load process**.
 
 **Script path:** /root/[top-metrics-log.sh](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/scripts/top-metrics-log.sh) \
-Script set variables: \
+Script variables: \
 **path** - path to log file (example: **/var/log/top-metrics.log**) \
 **trigger** - CPU load percentage (example: **20 %**) for logging for logging high-load process
 
@@ -94,7 +94,7 @@ Collection metrics **iostat** from the set sysstat for **write log file**
 
 **Service path:** /etc/systemd/system/[iostat-metrics-log.service](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/service/iostat-metrics-log.service) \
 **Script path:** /root/[iostat-metrics-log.sh](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/scripts/iostat-metrics-log.sh) \
-Script set variables: **path** - path to log file (example: **/var/log/iostat.log**)
+Script variables: **path** - path to log file (example: **/var/log/iostat.log**)
 
 ```bash
 root@devops-01:~# systemctl daemon-reload
@@ -126,4 +126,43 @@ Sep 05 12:45:54 devops-01 bash[729061]: 5 Sep 12:45:52  tps = 0  read/s = 0.0k  
 ```
 
 ## iostat-to-influxdb
+
+**Service path:** /etc/systemd/system/[iostat-to-influxdb.service](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/service/iostat-to-influxdb.service) \
+**Script path:** /root/[iostat-to-influxdb.sh](https://github.com/Lifailon/monitor-metrics-log/blob/rsa/scripts/iostat-to-influxdb.sh) \
+Script variables: \
+**ip** - ip-address server InfluxDB \
+**db** - Database name \
+**table** - Measurement/Table name
+
+```bash
+root@devops-01:~# systemctl daemon-reload
+root@devops-01:~# systemctl enable iostat-to-influxdb.service
+root@devops-01:~# systemctl start iostat-to-influxdb.service
+root@devops-01:~# systemctl status iostat-to-influxdb.service
+● iostat-to-influxdb.service - Collection metrics iostat from the set sysstat for send to influxdb
+     Loaded: loaded (/etc/systemd/system/iostat-to-influxdb.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2023-09-05 12:43:10 MSK; 1h 44min ago
+   Main PID: 720656 (bash)
+      Tasks: 4 (limit: 4515)
+     Memory: 1.0M
+        CPU: 1min 22.648s
+     CGroup: /system.slice/iostat-to-influxdb.service
+             ├─ 720656 /bin/bash /root/iostat-to-influxdb.sh
+             ├─1039830 /bin/bash /root/iostat-to-influxdb.sh
+             ├─1039831 iostat -ky /dev/sda /dev/sda1 /dev/sda2 /dev/sda3 /dev/sdb /dev/sdb1 /dev/sdc /dev/sdc1 1 1
+             └─1039832 grep -w sd.
+
+Sep 05 14:27:30 devops-01 bash[1039591]:                                  Dload  Upload   Total   Spent    Left  Speed
+Sep 05 14:27:30 devops-01 bash[1039591]: [158B blob data]
+Sep 05 14:27:30 devops-01 bash[1039591]: HTTP/1.1 204 No Content
+Sep 05 14:27:30 devops-01 bash[1039591]: Content-Type: application/json
+Sep 05 14:27:30 devops-01 bash[1039591]: Request-Id: 33045ca9-4bdf-11ee-bc29-000c294f9f2b
+Sep 05 14:27:30 devops-01 bash[1039591]: X-Influxdb-Build: OSS
+Sep 05 14:27:30 devops-01 bash[1039591]: X-Influxdb-Version: 1.7.11
+Sep 05 14:27:30 devops-01 bash[1039591]: X-Request-Id: 33045ca9-4bdf-11ee-bc29-000c294f9f2b
+Sep 05 14:27:30 devops-01 bash[1039591]: Date: Tue, 05 Sep 2023 11:27:30 GMT
+Sep 05 14:27:30 devops-01 bash[1039591]:
+```
+
+### Data to InfluxDB
 
