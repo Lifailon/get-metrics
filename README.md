@@ -1,8 +1,8 @@
-- [dir-monitor-log](##dir-monitor-log)
-- [top-metrics-log](##top-metrics-log)
-- [iostat-metrics-log](##iostat-metrics-log)
-- [logrotate](##logrotate)
-- [iostat-to-influxdb](##iostat-metrics-log)
+- [dir-monitor-log](#dir-monitor-log)
+- [top-metrics-log](#top-metrics-log)
+- [iostat-metrics-log](#iostat-metrics-log)
+- [logrotate](#logrotate)
+- [iostat-to-influxdb](#iostat-metrics-log)
 
 
 ## dir-monitor-log
