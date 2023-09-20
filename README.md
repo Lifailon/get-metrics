@@ -261,7 +261,9 @@ Sep 20 11:46:56 devops-01 bash[285471]: process=jenkins cpu_proc=0.3,mem_proc=12
 
 ![Image alt](https://github.com/Lifailon/shell-metrics/blob/rsa/screen/iostat-influxdb-max-tps.jpg)
 
-### Get process stats
+### Get process 
+
+**Process stats Jenkins when running the pipeline**
 
 `SELECT * FROM "proc_metrics_table" WHERE time > now() - 5m`
 
