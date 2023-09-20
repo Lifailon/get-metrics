@@ -243,7 +243,7 @@ Sep 20 11:46:56 devops-01 bash[285471]: process=jenkins cpu_proc=0.3,mem_proc=12
 
 ## InfluxDB
 
-**Get data iostat to InfluxDB**
+### Get data iostat
 
 `SELECT * FROM "iostat_metrics_table" WHERE time > now() - 5m`
 
@@ -261,7 +261,7 @@ Sep 20 11:46:56 devops-01 bash[285471]: process=jenkins cpu_proc=0.3,mem_proc=12
 
 ![Image alt](https://github.com/Lifailon/shell-metrics/blob/rsa/screen/iostat-influxdb-max-tps.jpg)
 
-**Get process stats**
+### Get process stats
 
 `SELECT * FROM "proc_metrics_table" WHERE time > now() - 5m`
 
