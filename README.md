@@ -212,7 +212,7 @@ Sep 05 14:27:30 devops-01 bash[1039591]:
 
 ## proc-stats-to-influxdb
 
-Creating metrics for process monitoring.
+Creating metrics for monitoring consumption memory and CPU time process. \
 Script variables: \
 **process_name** - value for **Tag process** via space (example: **"mysqld" "jenkins"**)
 
