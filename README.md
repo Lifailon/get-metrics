@@ -5,14 +5,16 @@
 - [iostat-metrics-log](#iostat-metrics-log)
 - [logrotate](#logrotate)
 - [iostat-to-influxdb](#iostat-metrics-log)
+- [proc-stats-to-influxdb](#proc-stats-to-influxdb)
+- [InfluxDB](#influxdb)
 
 
 ## dir-monitor-log
 
 Directory monitoring for get metric to **file count, size and modify.** When the number of files is changed, a diff of changes is logging.
 
-**Service path:** /etc/systemd/system/[dir-monitor-log.service](https://github.com/Lifailon/get-metrics/blob/rsa/service/dir-monitor-log.service) \
-**Script path:** /root/[dir-monitor-log.sh](https://github.com/Lifailon/get-metrics/blob/rsa/scripts/dir-monitor-log.sh) \
+**Service path:** /etc/systemd/system/[dir-monitor-log.service](https://github.com/Lifailon/shell-metrics/blob/rsa/service/dir-monitor-log.service) \
+**Script path:** /root/[dir-monitor-log.sh](https://github.com/Lifailon/shell-metrics/blob/rsa/scripts/dir-monitor-log.sh) \
 Script variables: \
 **path_mon** - target directory for monitoring (example: **/var/lib/jenkins**) \
 **path_log** - path to log file (example: **/var/log/metrics/dir-monitor.log**)
@@ -49,13 +51,13 @@ root@devops-01:~# cat "/var/log/dir-monitor.log" | tail -n 15
 
 Collecting metrics from software **top** for write to the log file and **logging of high-load process**.
 
-**Script path:** /root/[top-metrics-log.sh](https://github.com/Lifailon/get-metrics/blob/rsa/scripts/top-metrics-log.sh) \
+**Script path:** /root/[top-metrics-log.sh](https://github.com/Lifailon/shell-metrics/blob/rsa/scripts/top-metrics-log.sh) \
 Script variables: \
 **path** - path to log file (example: **/var/log/metrics/top-metrics.log**) \
 **trigger** - CPU load percentage (example: **20 %**) for logging for logging high-load process
 
 **Initialization unit to systemd:** \
-Creat service to path: /etc/systemd/system/[top-metrics-log.service](https://github.com/Lifailon/get-metrics/blob/rsa/service/top-metrics-log.service) \
+Creat service to path: /etc/systemd/system/[top-metrics-log.service](https://github.com/Lifailon/shell-metrics/blob/rsa/service/top-metrics-log.service) \
 `systemctl daemon-reload` \
 `systemctl enable top-metrics-log.service` \
 `systemctl start top-metrics-log`
@@ -101,8 +103,8 @@ Warning:  4 Sep 01:16:43  Top Process: java  Time: 5:12.71  CPU: 95.0 %  MEM: 13
 
 Collection metrics **iostat** from the set sysstat for **write log file**
 
-**Service path:** /etc/systemd/system/[iostat-metrics-log.service](https://github.com/Lifailon/get-metrics/blob/rsa/service/iostat-metrics-log.service) \
-**Script path:** /root/[iostat-metrics-log.sh](https://github.com/Lifailon/get-metrics/blob/rsa/scripts/iostat-metrics-log.sh) \
+**Service path:** /etc/systemd/system/[iostat-metrics-log.service](https://github.com/Lifailon/shell-metrics/blob/rsa/service/iostat-metrics-log.service) \
+**Script path:** /root/[iostat-metrics-log.sh](https://github.com/Lifailon/shell-metrics/blob/rsa/scripts/iostat-metrics-log.sh) \
 Script variables: \
 **path** - path to log file (example: **/var/log/metrics/iostat-metrics.log**)
 
@@ -137,7 +139,7 @@ Sep 05 12:45:54 devops-01 bash[729061]: 5 Sep 12:45:52  tps = 0  read/s = 0.0k  
 
 ## logrotate
 
-Automated log file rotation for all metrics: /etc/logrotate.d/[logrotate_metrics.conf](https://github.com/Lifailon/get-metrics/blob/rsa/logrotate_metrics.conf)
+Automated log file rotation for all metrics: /etc/logrotate.d/[logrotate_metrics.conf](https://github.com/Lifailon/shell-metrics/blob/rsa/logrotate_metrics.conf)
 
 **Debug:**
 
@@ -171,8 +173,8 @@ Creating new state
 
 ## iostat-to-influxdb
 
-**Service path:** /etc/systemd/system/[iostat-to-influxdb.service](https://github.com/Lifailon/get-metrics/blob/rsa/service/iostat-to-influxdb.service) \
-**Script path:** /root/[iostat-to-influxdb.sh](https://github.com/Lifailon/get-metrics/blob/rsa/scripts/iostat-to-influxdb.sh) \
+**Service path:** /etc/systemd/system/[iostat-to-influxdb.service](https://github.com/Lifailon/shell-metrics/blob/rsa/service/iostat-to-influxdb.service) \
+**Script path:** /root/[iostat-to-influxdb.sh](https://github.com/Lifailon/shell-metrics/blob/rsa/scripts/iostat-to-influxdb.sh) \
 Script variables: \
 **ip** - ip-address server InfluxDB \
 **db** - Database name \
@@ -208,20 +210,59 @@ Sep 05 14:27:30 devops-01 bash[1039591]: Date: Tue, 05 Sep 2023 11:27:30 GMT
 Sep 05 14:27:30 devops-01 bash[1039591]:
 ```
 
-### Data to InfluxDB
+## proc-stats-to-influxdb
+
+Creating metrics for process monitoring.
+Script variables: \
+**process_name** - value for **Tag process** via space (example: **"mysqld" "jenkins"**)
+
+```bash
+root@devops-01:~# systemctl status proc-stats-to-influxdb
+● proc-stats-to-influxdb.service - Process statisctics for send to influxdb
+     Loaded: loaded (/etc/systemd/system/proc-stats-to-influxdb.service; enabled; vendor preset: enabled)
+     Active: active (running) since Wed 2023-09-20 11:43:40 MSK; 3min 17s ago
+   Main PID: 285471 (bash)
+      Tasks: 2 (limit: 4515)
+     Memory: 804.0K
+        CPU: 8.171s
+     CGroup: /system.slice/proc-stats-to-influxdb.service
+             ├─285471 /bin/bash /root/proc-stats-to-influxdb.sh
+             └─296048 sleep 5
+
+Sep 20 11:46:34 devops-01 bash[285471]: process=mysqld cpu_proc=1.3,mem_proc=9.9,sz_mb=327,rss_mb=387,vsz_mb=1310,threads=37,core=0
+Sep 20 11:46:34 devops-01 bash[285471]: process=jenkins cpu_proc=0.3,mem_proc=12.4,sz_mb=785,rss_mb=481,vsz_mb=3140,threads=61,core=0
+Sep 20 11:46:40 devops-01 bash[285471]: process=mysqld cpu_proc=1.3,mem_proc=9.9,sz_mb=327,rss_mb=387,vsz_mb=1310,threads=37,core=0
+Sep 20 11:46:40 devops-01 bash[285471]: process=jenkins cpu_proc=0.3,mem_proc=12.4,sz_mb=785,rss_mb=481,vsz_mb=3140,threads=61,core=0
+Sep 20 11:46:45 devops-01 bash[285471]: process=mysqld cpu_proc=1.3,mem_proc=9.9,sz_mb=327,rss_mb=387,vsz_mb=1310,threads=37,core=0
+Sep 20 11:46:45 devops-01 bash[285471]: process=jenkins cpu_proc=0.3,mem_proc=12.4,sz_mb=785,rss_mb=481,vsz_mb=3140,threads=61,core=0
+Sep 20 11:46:50 devops-01 bash[285471]: process=mysqld cpu_proc=1.3,mem_proc=9.9,sz_mb=327,rss_mb=387,vsz_mb=1310,threads=37,core=0
+Sep 20 11:46:50 devops-01 bash[285471]: process=jenkins cpu_proc=0.3,mem_proc=12.4,sz_mb=785,rss_mb=481,vsz_mb=3140,threads=61,core=0
+Sep 20 11:46:56 devops-01 bash[285471]: process=mysqld cpu_proc=1.3,mem_proc=9.9,sz_mb=327,rss_mb=387,vsz_mb=1310,threads=37,core=0
+Sep 20 11:46:56 devops-01 bash[285471]: process=jenkins cpu_proc=0.3,mem_proc=12.4,sz_mb=785,rss_mb=481,vsz_mb=3140,threads=61,core=0
+```
+
+## InfluxDB
+
+**Get data iostat to InfluxDB**
 
 `SELECT * FROM "iostat_metrics_table" WHERE time > now() - 5m`
 
-![Image alt](https://github.com/Lifailon/get-metrics/blob/rsa/screen/iostat-influxdb-data.jpg)
+![Image alt](https://github.com/Lifailon/shell-metrics/blob/rsa/screen/iostat-influxdb-data.jpg)
 
 **Key by name selection:**
 
 `SELECT * FROM iostat_metrics_table WHERE disk = 'sda' and time > now() - 10m`
 
-![Image alt](https://github.com/Lifailon/get-metrics/blob/rsa/screen/iostat-influxdb-key-selection.jpg)
+![Image alt](https://github.com/Lifailon/shell-metrics/blob/rsa/screen/iostat-influxdb-key-selection.jpg)
 
 **Founction for output of the maximum tps value:**
 
 `SELECT read_kb_sec,write_kb_sec,MAX(tps) FROM "iostat_metrics_table" GROUP BY instance`
 
-![Image alt](https://github.com/Lifailon/get-metrics/blob/rsa/screen/iostat-influxdb-max-tps.jpg)
+![Image alt](https://github.com/Lifailon/shell-metrics/blob/rsa/screen/iostat-influxdb-max-tps.jpg)
+
+**Get process stats**
+
+`SELECT * FROM "proc_metrics_table" WHERE time > now() - 5m`
+
+![Image alt](https://github.com/Lifailon/shell-metrics/blob/rsa/screen/process-stats-influxdb-data.jpg)
